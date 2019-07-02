@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["esnext", "dom"],
+    "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types", "@types"],
+    "allowSyntheticDefaultImports": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "pretty": true,
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin"
+      }
+    ]
+  },
+  "exclude": ["node_modules", "docs", "build", "test.ts", "**/*.spec.ts"]
+}
