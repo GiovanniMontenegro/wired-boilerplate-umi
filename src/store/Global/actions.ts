@@ -1,20 +1,17 @@
-import GlobalActionTypes from './global.constants';
+import GlobalActionTypes from './constants';
 import { createAction } from 'typesafe-actions';
 
 /**
  * Action for global model
  */
-export const GlobalActions = {
+export const actions = {
   /**
    * Global actions
    */
-  onLayoutChange: createAction(GlobalActionTypes.LAYOUT_CHANGE as string, action => {
+  onLayoutChange: createAction(GlobalActionTypes.CHANGE_LAYOUT_COLLAPSED as string, action => {
     return (payload?: {}) => action(payload);
   }),
-  onGlobalLayoutChange: createAction(GlobalActionTypes.GLOBAL_LAYOUT_CHANGE as string, action => {
+  onChangeMenuSelected: createAction(GlobalActionTypes.CHANGE_MENU_SELECTED as string, action => {
     return (payload?: {}) => action(payload);
-  }),
-  changeTheme: createAction(GlobalActionTypes.CHANGE_THEME as string, action => {
-    return () => action();
   }),
 };

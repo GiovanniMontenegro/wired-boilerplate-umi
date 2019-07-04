@@ -3,9 +3,8 @@
  */
 
 enum GlobalActionTypes {
-  LAYOUT_CHANGE = 'layoutChange',
-  GLOBAL_LAYOUT_CHANGE = 'global/layoutChange',
-  CHANGE_THEME = 'theme/changeTheme',
+  CHANGE_LAYOUT_COLLAPSED = 'global/changeLayoutCollapsed',
+  CHANGE_MENU_SELECTED = 'global/changeMenuSelected',
 }
 
 export default GlobalActionTypes;

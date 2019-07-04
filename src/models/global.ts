@@ -22,7 +22,7 @@ const GlobalModel: GlobalModelType = {
   state: {
     menu: {
       collapsed: false,
-      selected: '1',
+      selected: 'home',
     },
   },
   reducers: {
