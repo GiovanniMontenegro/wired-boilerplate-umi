@@ -5,8 +5,9 @@ import MenuHeader from './Header';
 import { ConnectState, Dispatch } from '@/models/connect';
 import { MenuProps } from '@/models/global';
 import { actions } from '@/store/Global/actions';
+import { RouteComponentProps } from 'react-router';
 const { Content } = Layout;
-export interface BasicLayoutProps {
+export interface BasicLayoutProps extends RouteComponentProps {
   menu: MenuProps;
   onChangeSelectedMenu: (menu: string) => void;
 }
