@@ -1,3 +1,5 @@
+import './global.less';
+import 'animate.css/animate.min.css';
 
 export const dva = {
   config: {

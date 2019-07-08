@@ -3,7 +3,7 @@ import { Layout, Menu, Row, Col } from 'antd';
 import { MenuProps } from '@/models/global';
 import { ClickParam } from 'antd/lib/menu';
 import router from 'umi/router';
-import { formatMessage, setLocale, getLocale, FormattedMessage } from 'umi-plugin-locale';
+import { FormattedMessage } from 'umi-plugin-locale';
 import LocaleSwitcher from '../LocaleSwitcher';
 
 const { Header } = Layout;
@@ -16,12 +16,12 @@ export interface MenuHeaderProps {
 const MenuHeader: React.FC<MenuHeaderProps> = props => {
   const onChangeMenu = (selected: ClickParam) => {
     props.onChange(selected.key);
-    router.push(`/${selected.key}`);
+    router.push(`${selected.key}`);
   };
   return (
-    <Header style={{ padding: '0' }}>
+    <Header>
       <Row>
-        <Col offset="1" span="20">
+        <Col span="20">
           <Menu
             theme="dark"
             mode="horizontal"
@@ -29,15 +29,15 @@ const MenuHeader: React.FC<MenuHeaderProps> = props => {
             style={{ lineHeight: '64px' }}
             onSelect={onChangeMenu}
           >
-            <Menu.Item key="home">
+            <Menu.Item key="/">
               <FormattedMessage id="menu.home" />
             </Menu.Item>
-            <Menu.Item key="settings">
+            <Menu.Item key="/settings">
               <FormattedMessage id="menu.settings" />
             </Menu.Item>
           </Menu>
         </Col>
-        <Col span="2">
+        <Col span="4">
           <Row type="flex" justify="end">
             <LocaleSwitcher />
           </Row>

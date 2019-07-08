@@ -1,23 +1,25 @@
 import React from 'react';
-import styles from './index.css';
-import { Button } from 'antd';
-import { formatMessage } from 'umi-plugin-locale';
+import { Row, Card } from 'antd';
 
+const { Meta } = Card;
 export default function() {
   return (
-    <div className={styles.normal}>
-      <div className={styles.welcome} />
-      <ul className={styles.list}>
-        <Button type="primary">Ciao</Button>
-        <li>
-          To get started, edit <code>src/pages/index.js</code> and save to reload.
-        </li>
-        <li>
-          <a href="https://umijs.org/guide/getting-started.html">
-            {formatMessage({ id: 'index.start' })}
-          </a>
-        </li>
-      </ul>
-    </div>
+    <Row type="flex" align="middle" justify="center">
+      <Card
+        style={{ width: 800 }}
+        cover={
+          <img
+            alt="New content"
+            style={{ width: 800 }}
+            src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34"
+          />
+        }
+      >
+        <Meta
+          title="Create your new beautiful content"
+          description="#new #react #wired-boilerplate"
+        />
+      </Card>
+    </Row>
   );
 }

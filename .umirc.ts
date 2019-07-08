@@ -1,11 +1,9 @@
 import { IConfig } from 'umi-types';
 import fs from 'fs';
 import lessToJs from 'less-vars-to-js';
-import generate from '@ant-design/colors/lib/generate';
 
 // Read the less file in as string
-const paletteLess = fs.readFileSync('./src/theme/.theme/theme.less', 'utf8');
-
+const paletteLess = fs.readFileSync('./src/styles/theme/index.less', 'utf8');
 // Pass in file contents
 const palette = lessToJs(paletteLess, { resolveVariables: true, stripPrefix: true });
 
@@ -38,6 +36,17 @@ const config: IConfig = {
         },
       },
     ],
+  ],
+  routes: [
+    {
+      path: '/',
+      component: '../layouts/index.tsx',
+      routes: [
+        { path: '/', component: './index.tsx' },
+        { path: '/login', component: './login/index.tsx' },
+        { path: '/settings', component: './index.tsx' },
+      ],
+    },
   ],
 };
 
