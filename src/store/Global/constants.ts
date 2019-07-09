@@ -5,6 +5,7 @@
 enum GlobalActionTypes {
   CHANGE_LAYOUT_COLLAPSED = 'global/changeLayoutCollapsed',
   CHANGE_MENU_SELECTED = 'global/changeMenuSelected',
+  CHANGE_LANGUAGE = 'global/changeLanguage',
 }
 
 export default GlobalActionTypes;

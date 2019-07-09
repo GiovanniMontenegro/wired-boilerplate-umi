@@ -2,31 +2,40 @@ import React from 'react';
 import { getLocale, setLocale } from 'umi-plugin-locale';
 import { Menu, Dropdown } from 'antd';
 import { SelectParam } from 'antd/lib/menu';
+import LocalesSwitch, { Locales, ILocale } from './LocalesSwitch';
 
-export interface LocaleSwitcherProps {}
+export interface LocaleSwitcherProps {
+  onChangeLanguage: (language: string) => void;
+}
 
-const changeLocale = (value: SelectParam) => {
-  setLocale(value.key, false);
+const getFlagIcon = (country: string) => {
+  const localeSwitch: LocalesSwitch = new LocalesSwitch();
+  const locale: ILocale | undefined = localeSwitch.getLocale(country);
+
+  if (locale) {
+    return <img src={locale.url} />;
+  }
+  return;
 };
 
 const LocaleSwitcher: React.FC<LocaleSwitcherProps> = props => {
   const localeSelected = getLocale();
 
-  const getFlagIcon = (country: string) => {
-    let url = 'great-britain';
-    if (country === 'it-IT') {
-      url = 'italy';
-    } else if (country === 'en-US') {
-      url = 'great-britain';
+  const changeLocale = (value: SelectParam) => {
+    const newLocaleValue = value.key;
+    if (localeSelected !== newLocaleValue) {
+      props.onChangeLanguage(newLocaleValue);
+      setLocale(value.key, false);
     }
-    return <img src={`https://img.icons8.com/color/36/000000/${url}.png`} />;
   };
+
   const menu = (
     <Menu onSelect={changeLocale} onClick={changeLocale}>
-      <Menu.Item key="it-IT">{getFlagIcon('it-IT')}</Menu.Item>
-      <Menu.Item key="en-US">{getFlagIcon('en-US')}</Menu.Item>
+      <Menu.Item key="en-US">{getFlagIcon(Locales.en_US)}</Menu.Item>
+      <Menu.Item key="it-IT">{getFlagIcon(Locales.it_IT)}</Menu.Item>
     </Menu>
   );
+
   return (
     <Dropdown overlay={menu} trigger={['click']}>
       <a href="#">{getFlagIcon(localeSelected)}</a>
@@ -35,5 +44,3 @@ const LocaleSwitcher: React.FC<LocaleSwitcherProps> = props => {
 };
 
 export default LocaleSwitcher;
-/*
- */

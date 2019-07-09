@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Row, Col } from 'antd';
-import { MenuProps } from '@/models/global';
+import { IMenuProps } from '@/models/global';
 import { ClickParam } from 'antd/lib/menu';
 import router from 'umi/router';
 import { FormattedMessage } from 'umi-plugin-locale';
@@ -9,13 +9,17 @@ import LocaleSwitcher from '../LocaleSwitcher';
 const { Header } = Layout;
 
 export interface MenuHeaderProps {
-  menu: MenuProps;
-  onChange: (menu: string) => void;
+  menu: IMenuProps;
+  onChange: (menu: IMenuProps) => void;
+  onChangeLanguage: (language: string) => void;
 }
 
 const MenuHeader: React.FC<MenuHeaderProps> = props => {
   const onChangeMenu = (selected: ClickParam) => {
-    props.onChange(selected.key);
+    props.onChange({
+      collapsed: props.menu.collapsed,
+      selected: selected.key,
+    });
     router.push(`${selected.key}`);
   };
   return (
@@ -39,7 +43,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = props => {
         </Col>
         <Col span="4">
           <Row type="flex" justify="end">
-            <LocaleSwitcher />
+            <LocaleSwitcher onChangeLanguage={props.onChangeLanguage} />
           </Row>
         </Col>
       </Row>
