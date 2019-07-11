@@ -1,21 +1,18 @@
 import { AnyAction } from 'redux';
 import { EffectsCommandMap } from 'dva';
 import { RouterTypes } from 'umi';
-import { GlobalModelState } from './global';
-
-export { GlobalModelState };
+import { SessionModelState } from './session';
 
 export interface Loading {
   global: boolean;
   effects: { [key: string]: boolean | undefined };
   models: {
-    global?: boolean;
-    menu?: boolean;
+    session?: boolean;
   };
 }
 
 export interface ConnectState {
-  global: GlobalModelState;
+  session: SessionModelState;
   loading: Loading;
 }
 

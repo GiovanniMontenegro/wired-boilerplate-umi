@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { Row, Col, Form, Input, Icon, Button } from 'antd';
-import { FormProps } from 'antd/lib/form';
+import { connect } from 'react-redux';
+import { actions } from '@/store/Session/actions';
+import { WrappedFormInternalProps } from 'antd/lib/form/Form';
+import { Dispatch, ConnectState, Loading } from '@/models/connect';
+import { isEmpty, has } from 'lodash';
+import { ILoginRequest } from '../services/login.service';
+import { FormattedMessage } from 'umi-plugin-locale';
 
-export interface LoginProps extends FormProps {}
+export interface LoginProps extends WrappedFormInternalProps {
+  onLogin: (loginRQ: ILoginRequest) => void;
+  loading: Loading;
+}
+
+const isLoginLoading = (effects: { [key: string]: boolean | undefined }) => {
+  if (effects && !isEmpty(effects) && has(effects, 'session/login')) {
+    return effects['session/login'];
+  }
+  return false;
+};
 
 const Login: React.FC<LoginProps> = props => {
   const { getFieldDecorator } = props.form;
+
+  const onSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    console.log(e);
+    props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('LoginRQ: ', values);
+        props.onLogin(values);
+      }
+    });
+  };
   return (
     <Row className="login-container">
       <Col xs={24} xl={8}>
@@ -22,17 +49,12 @@ const Login: React.FC<LoginProps> = props => {
           >
             <Row type="flex" justify="center" className="sign-up-title">
               <Col xs="10" lg="6">
-                Welcome
+                <FormattedMessage id="login.title.form" />
               </Col>
             </Row>
             <Row type="flex" justify="center" className="login-form">
               <Col span="22">
-                <Form
-                  onSubmit={() => {
-                    console.log('ciao');
-                  }}
-                  className="login-form"
-                >
+                <Form onSubmit={onSubmit} className="login-form">
                   <Form.Item>
                     {getFieldDecorator('username', {
                       rules: [{ required: true, message: 'Please input your username!' }],
@@ -57,8 +79,13 @@ const Login: React.FC<LoginProps> = props => {
                     )}
                   </Form.Item>
                   <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
-                      Log in
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className="login-form-button"
+                      loading={isLoginLoading(props.loading.effects)}
+                    >
+                      <FormattedMessage id="login.button.login" />
                     </Button>
                   </Form.Item>
                 </Form>
@@ -71,4 +98,14 @@ const Login: React.FC<LoginProps> = props => {
   );
 };
 
-export default Form.create()(Login);
+export default connect(
+  ({ session, loading }: ConnectState) => ({
+    menu: session.menu,
+    language: session.language,
+    user: session.user,
+    loading: loading,
+  }),
+  (dispatch: Dispatch) => ({
+    onLogin: (loginRQ: ILoginRequest) => dispatch(actions.onLogin(loginRQ)),
+  }),
+)(Form.create()(Login));

@@ -40,11 +40,11 @@ const config: IConfig = {
   routes: [
     {
       path: '/',
-      component: '../layouts/index.tsx',
+      component: '../layouts/entry.layout.tsx',
       routes: [
-        { path: '/', component: './index.tsx' },
-        { path: '/login', component: './login/index.tsx' },
-        { path: '/settings', component: './index.tsx' },
+        { path: '/', component: './home.page.tsx' },
+        { path: '/login', component: './login.page.tsx' },
+        { path: '/settings', component: './home.page.tsx' },
       ],
     },
   ],

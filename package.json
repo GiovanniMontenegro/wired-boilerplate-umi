@@ -13,11 +13,14 @@
     "antd": "^3.20.0",
     "dva": "^2.6.0-beta.6",
     "less-vars-to-js": "^1.3.0",
+    "lodash": "^4.17.14",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "umi-request": "^1.1.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
+    "@types/lodash": "^4.14.136",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "@types/react-test-renderer": "^16.0.3",

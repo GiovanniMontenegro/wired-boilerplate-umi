@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Row, Col } from 'antd';
-import { IMenuProps } from '@/models/global';
+import { IMenuProps } from '@/models/session';
 import { ClickParam } from 'antd/lib/menu';
 import router from 'umi/router';
 import { FormattedMessage } from 'umi-plugin-locale';

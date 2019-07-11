@@ -1,5 +1,5 @@
 import 'jest';
-import Index from '..';
+import Index from '../home.page';
 import React from 'react';
 import renderer, { ReactTestInstance, ReactTestRenderer } from 'react-test-renderer';
 
